@@ -1,31 +1,33 @@
 # Instagram
 
-这里放的是 Instagram 相关的独立 n8n workflow。
+English | [简体中文](./README.zh-CN.md)
 
-## 目录内容
+This folder contains standalone n8n workflows for Instagram.
+
+## Contents
 
 - `Create/instagram-create.redacted.json`
 - `Update/instagram-update.redacted.json`
 
-## 适用场景
+## When to use each workflow
 
 ### Create
-当你想按月新建一张 Instagram 数据追踪表，并把指定账号或页面的数据批量写进去时使用。
+Use this when you want to create a new monthly Instagram tracking table and bulk import data for selected accounts or pages.
 
 ### Update
-当你已经有一张 Instagram 数据表，只想刷新互动数据和帖子表现时使用。
+Use this when you already have an Instagram table and only want to refresh engagement and post performance data.
 
-## 依赖项
+## Dependencies
 
 - n8n
 - Feishu / Lark
 - Bitable
 - Apify
-- Create 流程额外依赖 DeepSeek
+- The Create flow also depends on DeepSeek
 
-## 使用建议
+## Usage notes
 
-- 如果是第一次搭建，先看 `Create/README.md`
-- 如果已经有表，直接看 `Update/README.md`
-- 导入后先把占位符改成你自己的配置，再测试一轮
-- 这套流程依赖 Apify Actor，正式调用前先确认账号已经开通对应订阅或可调用权限
+- If you are setting this up for the first time, start with `Create/README.md`.
+- If you already have a table, go directly to `Update/README.md`.
+- Replace placeholders with your own configuration before testing.
+- These workflows depend on Apify actors, so confirm that your Apify account has the required subscription, quota, or actor access before production use.

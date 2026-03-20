@@ -1,33 +1,35 @@
 # Instagram / Update
 
-这条 workflow 是从 SocialMediaTracker 的 Update 主流程里拆出来的 Instagram 独立版本。
+English | [简体中文](./README.zh-CN.md)
 
-对应文件：`instagram-update.redacted.json`
+This workflow is the standalone Instagram version extracted from the SocialMediaTracker Update flow.
 
-## 用途
+Corresponding file: `instagram-update.redacted.json`
 
-- 读取已有 Bitable 记录
-- 只筛出 Instagram 记录
-- 调用 Instagram Scraper 重新抓取数据
-- 按 record_id 更新回原表
+## Purpose
 
-## 导入后要修改的内容
+- Read existing Bitable records
+- Filter Instagram records only
+- Re-fetch Instagram data with the scraper
+- Update the original table by `record_id`
+
+## Configuration to replace after import
 
 - `{{BITABLE_APP_TOKEN}}`
 - `{{BITABLE_TABLE_ID}}`
 - `{{FEISHU_APP_ID}}`
 - `{{FEISHU_APP_SECRET}}`
-- Apify 凭证绑定
+- Apify credential binding
 
-## 主流程
+## Main flow
 
-1. 读取字段列表和记录
-2. 按平台分组
-3. 进入 Instagram 分支
-4. 抓取最新帖子数据
-5. 匹配原记录
-6. 更新飞书记录
+1. Read the field list and records
+2. Group records by platform
+3. Enter the Instagram branch
+4. Fetch the latest post data
+5. Match the result with the original records
+6. Update Feishu records
 
-## 说明
+## Notes
 
-适合放在日常数据刷新流程里单独跑 Instagram。
+This workflow works well as a standalone Instagram refresh step in a recurring update pipeline.

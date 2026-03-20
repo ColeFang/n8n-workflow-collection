@@ -1,17 +1,19 @@
 # X / Create
 
-这条 workflow 是从 SocialMediaTracker 的 Create 主流程里拆出来的 X 独立版本。
+English | [简体中文](./README.zh-CN.md)
 
-对应文件：`x-create.redacted.json`
+This workflow is the standalone X version extracted from the SocialMediaTracker Create flow.
 
-## 用途
+Corresponding file: `x-create.redacted.json`
 
-- 创建新的 Bitable 数据表
-- 只处理 X / Twitter 输入链接
-- 按时间范围抓取帖子数据
-- 标准化字段后批量写入新表
+## Purpose
 
-## 导入后要修改的内容
+- Create a new Bitable data table
+- Process X / Twitter input URLs only
+- Collect post data within a time range
+- Normalize the result and write it into the new table in bulk
+
+## Configuration to replace after import
 
 - `{{BITABLE_APP_TOKEN}}`
 - `{{BITABLE_TEMPLATE_TABLE_ID}}`
@@ -20,8 +22,8 @@
 - `{{FEISHU_APP_SECRET}}`
 - `{{X_PROFILE_URL}}`
 
-建议把 `配置参数` 节点中的 `profileUrls` 只保留 X / Twitter 链接，当前独立版已经收窄为单个平台输入。
+In the `配置参数` node, keep only X / Twitter links inside `profileUrls`. This standalone version is already scoped to one platform.
 
-## 说明
+## Notes
 
-Create 版本会利用年月信息构造 X 的搜索条件，适合按月做归档采集。
+The Create flow uses year/month information to build X search conditions, which makes it suitable for monthly archive-style collection.

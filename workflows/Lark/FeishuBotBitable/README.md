@@ -1,38 +1,39 @@
 # FeishuBotBitable
 
-这套 workflow 用来处理飞书机器人发来的需求描述，把文本整理成结构化字段，并自动写入多维表格。
+English | [简体中文](./README.zh-CN.md)
 
-对应文件：`feishu-bot-bitable-workflow.redacted.json`
+This workflow receives requirement messages from a Feishu bot, turns them into structured fields, and writes the result into Bitable.
 
-## 适用场景
+Corresponding file: `feishu-bot-bitable-workflow.redacted.json`
 
-适合做这些事情：
-- 让同事直接在飞书里提需求
-- 自动补齐 Bitable 里的字段
-- 自动生成一份简版 PRD
-- 回写一条飞书卡片消息给提交人
+## Use cases
 
-## 主流程
+- Let teammates submit requirements directly in Feishu
+- Fill Bitable fields automatically
+- Generate a lightweight PRD automatically
+- Send a Feishu card reply back to the submitter
 
-1. 通过 Webhook 接收飞书消息
-2. 获取 Tenant Token
-3. 查询发送者信息
-4. 读取 Bitable 字段列表
-5. 构建 Prompt，让 DeepSeek 生成字段值
-6. 再调用一次 DeepSeek 生成 PRD 文本
-7. 新增一条 Bitable 记录
-8. 回复飞书交互卡片
+## Main flow
 
-## 依赖项
+1. Receive a Feishu message through a webhook
+2. Get a tenant token
+3. Query sender information
+4. Read the Bitable field list
+5. Build a prompt and ask DeepSeek to generate field values
+6. Call DeepSeek again to generate PRD content
+7. Create a new Bitable record
+8. Reply with a Feishu interactive card
+
+## Dependencies
 
 - n8n
-- Feishu / Lark 应用
+- Feishu / Lark app
 - Bitable
 - DeepSeek API
 
-## 导入后需要替换的配置
+## Configuration to replace after import
 
-公开版里这些值已经被替换成占位符：
+The public export replaces these values with placeholders:
 - `{{WEBHOOK_PATH}}`
 - `{{WEBHOOK_ID}}`
 - `{{FEISHU_APP_ID}}`
@@ -42,7 +43,7 @@
 - `{{BITABLE_TABLE_ID}}`
 - `{{BITABLE_BASE_URL}}`
 
-建议优先检查这些节点：
+Recommended nodes to check first:
 - `接收飞书消息`
 - `获取飞书 Tenant Token`
 - `获取多维表格字段列表`
@@ -51,30 +52,30 @@
 - `新增多维表格记录`
 - `回复飞书消息`
 
-## 输入与输出
+## Inputs and outputs
 
-### 输入
-- 飞书机器人收到的文本消息
-- 发送人 open_id / chat_id / message_id
+### Inputs
+- Text messages sent to the Feishu bot
+- Sender metadata such as `open_id`, `chat_id`, and `message_id`
 
-### 输出
-- 一条新增的 Bitable 记录
-- 一段写入字段的 PRD 文本
-- 一条回给用户的飞书卡片消息
+### Outputs
+- A new Bitable record
+- PRD text written into the target field
+- A Feishu card response sent back to the user
 
-## 使用建议
+## Usage notes
 
-- Bitable 字段命名尽量稳定，方便模型按字段含义填充。
-- 如果表里有“人员”“日期”“单选”“多选”字段，导入后先做一轮测试，确认字段类型映射没问题。
-- 如果 PRD 字段名不是 `AI需求说明`，记得同步改代码节点里的字段名。
+- Keep Bitable field names stable so the model can map values more reliably.
+- If the table uses person, date, single-select, or multi-select fields, test field mapping carefully after import.
+- If the PRD field name is not `AI需求说明`, update the field name in the code node accordingly.
 
-## 常见问题
+## FAQ
 
-### 1. 导入后为什么不能直接运行？
-因为仓库里是脱敏后的版本，所有凭证和业务参数都要重新填。
+### Why can't I run it immediately after import?
+Because this repository only includes redacted exports. You must re-enter credentials and business-specific settings.
 
-### 2. 为什么保留了流程结构但没有保留真实地址？
-这是为了可以公开分享，同时又不把生产环境配置暴露出去。
+### Why keep the workflow structure but remove real endpoints?
+So the workflow can be shared publicly without exposing production configuration.
 
-### 3. 适合直接用于生产吗？
-建议先在测试表中跑通，再接正式群和正式表。
+### Is it ready for production as-is?
+Use a test table and test chat first, then move to production once the flow is validated.

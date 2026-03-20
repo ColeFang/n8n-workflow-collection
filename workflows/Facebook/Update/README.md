@@ -1,24 +1,26 @@
 # Facebook / Update
 
-这条 workflow 是从 SocialMediaTracker 的 Update 主流程里拆出来的 Facebook 独立版本。
+English | [简体中文](./README.zh-CN.md)
 
-对应文件：`facebook-update.redacted.json`
+This workflow is the standalone Facebook version extracted from the SocialMediaTracker Update flow.
 
-## 用途
+Corresponding file: `facebook-update.redacted.json`
 
-- 读取已有 Bitable 记录
-- 只筛出 Facebook 记录
-- 重新抓取帖子互动数据
-- 更新回原表
+## Purpose
 
-## 导入后要修改的内容
+- Read existing Bitable records
+- Filter Facebook records only
+- Re-fetch post engagement data
+- Update the original table
+
+## Configuration to replace after import
 
 - `{{BITABLE_APP_TOKEN}}`
 - `{{BITABLE_TABLE_ID}}`
 - `{{FEISHU_APP_ID}}`
 - `{{FEISHU_APP_SECRET}}`
-- Apify 凭证绑定
+- Apify credential binding
 
-## 说明
+## Notes
 
-Facebook 页面和帖子链接格式容易变化，建议导入后先做小样本验证。
+Facebook page and post URL formats change often, so validate the workflow with a small sample after import.

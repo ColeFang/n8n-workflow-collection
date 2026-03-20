@@ -1,17 +1,19 @@
 # Youtube / Create
 
-这条 workflow 是从 SocialMediaTracker 的 Create 主流程里拆出来的 YouTube 独立版本。
+English | [简体中文](./README.zh-CN.md)
 
-对应文件：`youtube-create.redacted.json`
+This workflow is the standalone YouTube version extracted from the SocialMediaTracker Create flow.
 
-## 用途
+Corresponding file: `youtube-create.redacted.json`
 
-- 创建新的 Bitable 数据表
-- 只处理 YouTube 链接
-- 抓取频道或视频数据
-- 标准化后批量写入新表
+## Purpose
 
-## 导入后要修改的内容
+- Create a new Bitable data table
+- Process YouTube links only
+- Collect channel or video data
+- Normalize the result and write it into the new table in bulk
+
+## Configuration to replace after import
 
 - `{{BITABLE_APP_TOKEN}}`
 - `{{BITABLE_TEMPLATE_TABLE_ID}}`
@@ -20,8 +22,8 @@
 - `{{FEISHU_APP_SECRET}}`
 - `{{YOUTUBE_CHANNEL_URL}}`
 
-## 说明
+## Notes
 
-当前独立版的 `配置参数` 已经收窄为只保留 YouTube 单个平台输入。
+The `配置参数` node in this standalone version is already narrowed to YouTube-only input.
 
-建议导入后先确认你要抓的是频道、视频还是 Shorts，再调整 Apify 输入。
+After import, confirm whether you want to collect channel, video, or Shorts data and adjust the Apify input accordingly.

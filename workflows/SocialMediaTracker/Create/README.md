@@ -1,22 +1,24 @@
 # SocialMediaTracker / Create
 
-这条 workflow 用来根据一组社媒主页链接，创建新表并批量写入帖子数据。
+English | [简体中文](./README.zh-CN.md)
 
-对应文件：`social-media-effectiveness-tracker-create.redacted.json`
+This workflow creates a new table from a set of social profile URLs and writes post data into it in bulk.
 
-## 主流程
+Corresponding file: `social-media-effectiveness-tracker-create.redacted.json`
 
-1. 设置基础参数：年月、Bitable 参数、社媒主页链接、DeepSeek Key
-2. 获取 Tenant Token
-3. 读取已有表名和模板表字段
-4. 用 DeepSeek 生成一个新的表名
-5. 按模板字段创建新表
-6. 解析输入链接，按平台拆分成 Instagram / X / YouTube / Facebook 分支
-7. 调用 Apify 抓取各平台内容
-8. 统一整理字段结构
-9. 批量写入新表
+## Main flow
 
-## 依赖项
+1. Set base parameters such as year/month, Bitable settings, profile URLs, and the DeepSeek key
+2. Get a tenant token
+3. Read existing table names and the template table fields
+4. Use DeepSeek to generate a new table name
+5. Create a new table from the template fields
+6. Parse input URLs and split them into Instagram, X, YouTube, and Facebook branches
+7. Call Apify to collect data for each platform
+8. Normalize the result schema
+9. Write records into the new table in bulk
+
+## Dependencies
 
 - n8n
 - Feishu / Lark
@@ -24,9 +26,9 @@
 - DeepSeek API
 - Apify
 
-## 导入后要改的内容
+## Configuration to replace after import
 
-重点看 `配置参数` 节点，里面的占位符都需要替换：
+Check the `配置参数` node first. All of these placeholders must be replaced:
 - `{{BITABLE_APP_TOKEN}}`
 - `{{BITABLE_TEMPLATE_TABLE_ID}}`
 - `{{DEEPSEEK_API_KEY}}`
@@ -37,38 +39,38 @@
 - `{{FEISHU_APP_ID}}`
 - `{{FEISHU_APP_SECRET}}`
 
-另外还要确认：
-- 模板表字段是否适合你的业务
-- 新表命名规则是否符合你们的习惯
-- Bitable 字段类型和 Apify 返回结果是否能对上
+Also confirm:
+- the template table fields fit your use case
+- the naming rule for new tables matches your convention
+- the Bitable field types match the Apify output structure
 
-## 输入
+## Inputs
 
-主要输入是一组社媒主页链接，当前流程按照链接域名识别平台：
-- instagram.com
-- x.com / twitter.com
-- youtube.com
-- facebook.com
+The main input is a set of social profile URLs. The workflow currently detects platforms by domain name:
+- `instagram.com`
+- `x.com` / `twitter.com`
+- `youtube.com`
+- `facebook.com`
 
-## 输出
+## Outputs
 
-- 新建的一张 Bitable 表
-- 批量写入的新记录
-- 按平台统一处理后的帖子数据
+- A newly created Bitable table
+- New records written in bulk
+- Normalized post data from each platform branch
 
-## 使用建议
+## Usage notes
 
-- 先准备一张结构干净的模板表，避免新表字段失控。
-- 同一个月如果反复跑，先确认表名策略，避免重复建表。
-- 如果你只想抓某几个平台，可以删掉不用的 profile URL。
+- Start with a clean template table so the created table stays predictable.
+- If you run it multiple times in the same month, confirm the table naming strategy to avoid duplicates.
+- If you only need a subset of platforms, remove the unused profile URLs.
 
-## 常见问题
+## FAQ
 
-### 1. 为什么这里还保留 DeepSeek？
-因为它被用来根据已有表名规律生成新表名，不只是做文本生成。
+### Why is DeepSeek still used here?
+It is used to generate a new table name based on existing naming patterns, not only for free-text generation.
 
-### 2. 为什么 profile URL 用占位符而不是示例账号？
-因为这个流程本身就是围绕真实账号列表跑的，直接用占位符更清楚。
+### Why use placeholders instead of example accounts?
+Because the workflow is designed around real account lists, placeholders make the required configuration clearer.
 
-### 3. 导入后最容易出错的是哪里？
-通常是模板表字段、Apify 凭证和 profile URL 格式。
+### What usually breaks first after import?
+Template fields, Apify credentials, and profile URL formats are the most common failure points.

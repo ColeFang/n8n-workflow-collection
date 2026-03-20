@@ -1,30 +1,32 @@
 # Facebook
 
-这里放的是 Facebook 相关的独立 n8n workflow。
+English | [简体中文](./README.zh-CN.md)
 
-## 目录内容
+This folder contains standalone n8n workflows for Facebook.
+
+## Contents
 
 - `Create/facebook-create.redacted.json`
 - `Update/facebook-update.redacted.json`
 
-## 适用场景
+## When to use each workflow
 
 ### Create
-新建 Facebook 数据追踪表，并按给定页面链接抓取内容。
+Create a new Facebook tracking table and collect content from the provided page links.
 
 ### Update
-对已有 Facebook 记录重新抓取最新数据并更新回表格。
+Re-fetch the latest data for existing Facebook records and write it back to the table.
 
-## 依赖项
+## Dependencies
 
 - n8n
 - Feishu / Lark
 - Bitable
 - Apify
-- Create 流程额外依赖 DeepSeek
+- The Create flow also depends on DeepSeek
 
-## 使用建议
+## Usage notes
 
-- Facebook 链接格式变化比较多，建议导入后先拿少量样本测试
-- 如果返回字段和你的表不一致，先调整写回映射
-- 这套流程依赖 Apify Actor，正式调用前先确认账号已经开通对应订阅或可调用权限
+- Facebook link formats vary a lot, so start with a small sample after import.
+- If the returned fields do not match your table, adjust the write-back mapping first.
+- These workflows depend on Apify actors, so confirm that your Apify account has the required subscription, quota, or actor access before production use.

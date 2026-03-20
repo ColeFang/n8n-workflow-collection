@@ -1,65 +1,67 @@
 # SocialMediaTracker / Update
 
-这条 workflow 用来读取已有的 Bitable 记录，按平台拆分后重新抓取和更新帖子数据。
+English | [简体中文](./README.zh-CN.md)
 
-对应文件：`social-media-effectiveness-tracker.redacted.json`
+This workflow reads existing Bitable records, splits them by platform, and refreshes post data before writing updates back.
 
-## 主流程
+Corresponding file: `social-media-effectiveness-tracker.redacted.json`
 
-1. 设置 Bitable 参数
-2. 获取 Tenant Token
-3. 读取字段列表和所有记录
-4. 识别平台字段、链接字段
-5. 把记录按平台拆成 Instagram / X / YouTube / Facebook 分支
-6. 调用 Apify 拉取最新数据
-7. 将结果映射回原记录
-8. 按 record_id 更新回 Bitable
+## Main flow
 
-## 依赖项
+1. Set Bitable parameters
+2. Get a tenant token
+3. Read the field list and all records
+4. Detect the platform field and link field
+5. Split records into Instagram, X, YouTube, and Facebook branches
+6. Call Apify to fetch the latest data
+7. Map the result back to the original records
+8. Update Bitable by `record_id`
+
+## Dependencies
 
 - n8n
 - Feishu / Lark
 - Bitable
 - Apify
 
-## 导入后需要替换的配置
+## Configuration to replace after import
 
-先处理 `配置参数` 节点：
+Start with the `配置参数` node:
 - `{{BITABLE_APP_TOKEN}}`
 - `{{BITABLE_TABLE_ID}}`
 - `{{FEISHU_APP_ID}}`
 - `{{FEISHU_APP_SECRET}}`
 
-再检查这些内容：
-- 平台字段名是否和你的表一致
-- 链接字段名是否和你的表一致
-- 记录里存的链接结构是否和 Apify 输入要求一致
-- Apify 凭证是否已经在 n8n 中重绑
+Then verify:
+- the platform field name matches your table
+- the link field name matches your table
+- the stored link format matches Apify input requirements
+- Apify credentials have been rebound in n8n
 
-## 输入
+## Inputs
 
-- 一张已有的 Bitable 表
-- 表中的平台字段
-- 表中的帖子链接字段
+- An existing Bitable table
+- The platform field in that table
+- The post link field in that table
 
-## 输出
+## Outputs
 
-- 更新后的原始记录
-- 平台分支处理后的抓取结果
+- Updated original records
+- Platform-specific refreshed result sets
 
-## 使用建议
+## Usage notes
 
-- 这条流程更适合做定期更新，而不是第一次建表。
-- 如果记录很多，建议先缩小分页范围或先拿测试数据跑。
-- 如果字段名不是英文，也没关系，但要保证字段识别逻辑能匹配到。
+- This flow is better for recurring refreshes than for first-time imports.
+- If the table is large, reduce the page range or test with a smaller dataset first.
+- Non-English field names are fine as long as the field detection logic can still match them.
 
-## 常见问题
+## FAQ
 
-### 1. 为什么流程里能看到 Discord，但文档里没展开？
-因为当前导出的 update workflow 里有分组逻辑，但没有完整公开成独立平台说明。
+### Why does the workflow mention Discord but the docs do not explain it fully?
+Because the exported update flow still contains grouping logic for Discord, but the public repo does not include a full standalone Discord workflow.
 
-### 2. 更新失败一般是哪里出问题？
-最常见的是 record_id、链接字段结构、Apify 返回字段和你的表字段对不上。
+### What usually causes update failures?
+The most common issues are `record_id`, link format mismatches, and differences between Apify output fields and your table fields.
 
-### 3. 适合放定时任务吗？
-可以，但建议先手动跑通一次，再挂 cron。
+### Can this run on a schedule?
+Yes, but test it manually first before attaching a cron schedule.

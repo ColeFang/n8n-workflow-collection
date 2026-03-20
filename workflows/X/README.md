@@ -1,30 +1,32 @@
 # X
 
-这里放的是 X / Twitter 相关的独立 n8n workflow。
+English | [简体中文](./README.zh-CN.md)
 
-## 目录内容
+This folder contains standalone n8n workflows for X / Twitter.
+
+## Contents
 
 - `Create/x-create.redacted.json`
 - `Update/x-update.redacted.json`
 
-## 适用场景
+## When to use each workflow
 
 ### Create
-按月份新建 X 数据表，并采集指定账号在时间范围内的内容。
+Create a monthly X tracking table and collect posts from selected accounts within a time range.
 
 ### Update
-读取已有记录，重新抓取 X 帖子的互动数据并更新回表格。
+Read existing records, refresh X post engagement data, and write it back to the table.
 
-## 依赖项
+## Dependencies
 
 - n8n
 - Feishu / Lark
 - Bitable
 - Apify
-- Create 流程额外依赖 DeepSeek
+- The Create flow also depends on DeepSeek
 
-## 使用建议
+## Usage notes
 
-- 如果链接格式不是标准账号页，先检查 workflow 里的账号提取逻辑
-- Create 会按年月生成搜索条件，改月份时要一起确认抓取范围
-- 这套流程依赖 Apify Actor，正式调用前先确认账号已经开通对应订阅或可调用权限
+- If the link format is not a standard account page, check the account extraction logic first.
+- The Create flow builds X search conditions from year/month settings, so review the collection range when you change the month.
+- These workflows depend on Apify actors, so confirm that your Apify account has the required subscription, quota, or actor access before production use.

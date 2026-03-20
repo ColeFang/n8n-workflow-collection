@@ -1,24 +1,26 @@
 # Youtube / Update
 
-这条 workflow 是从 SocialMediaTracker 的 Update 主流程里拆出来的 YouTube 独立版本。
+English | [简体中文](./README.zh-CN.md)
 
-对应文件：`youtube-update.redacted.json`
+This workflow is the standalone YouTube version extracted from the SocialMediaTracker Update flow.
 
-## 用途
+Corresponding file: `youtube-update.redacted.json`
 
-- 读取已有 Bitable 记录
-- 只处理 YouTube 记录
-- 重新抓取视频表现数据
-- 更新回原表
+## Purpose
 
-## 导入后要修改的内容
+- Read existing Bitable records
+- Filter YouTube records only
+- Re-fetch video performance data
+- Update the original table
+
+## Configuration to replace after import
 
 - `{{BITABLE_APP_TOKEN}}`
 - `{{BITABLE_TABLE_ID}}`
 - `{{FEISHU_APP_ID}}`
 - `{{FEISHU_APP_SECRET}}`
-- Apify 凭证绑定
+- Apify credential binding
 
-## 说明
+## Notes
 
-如果表里没有匹配 YouTube 指标的字段，先改映射节点再跑。
+If your table does not include fields that match the YouTube metrics you want to store, adjust the mapping nodes before running the workflow.
